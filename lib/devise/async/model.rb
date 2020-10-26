@@ -27,7 +27,7 @@ module Devise
       def send_devise_notification(notification, *args)
         return super unless Devise::Async.enabled
 
-        if new_record? || saved_changes?
+        if new_record? || changed?
           pending_devise_notifications << [notification, args]
         else
           render_and_send_devise_message(notification, *args)
